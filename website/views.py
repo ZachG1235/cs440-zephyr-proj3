@@ -1,5 +1,3 @@
-# website/views.py
-
 from flask import Blueprint, request, render_template, redirect, url_for
 from .services import search_flights, save_flight
 
