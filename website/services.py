@@ -2,6 +2,8 @@ from amadeus import Client, ResponseError
 from os import getenv
 import concurrent.futures
 import time
+from .repository import get_flights_by_search, add_flight
+
 
 # delay CONSTANT
 DELAY = 2
@@ -11,6 +13,13 @@ amadeus = Client(
     client_id=getenv("AMADEUS_API_KEY"),
     client_secret=getenv("AMADEUS_API_SECRET")
 )
+
+def search_flights(origin, destination, date):
+    flights = get_flights_by_search(origin, destination, date)
+    return flights
+
+def save_flight(flight_data):
+    return add_flight(flight_data)
 
 # Helper function to fetch flight offers for a specific airport
 def fetch_flight_offers_for_airport(airport, origin, date, max_price, max_retries=3):
