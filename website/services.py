@@ -151,3 +151,16 @@ def get_airports(country):
         # Print any errors that occur during the API request
         print("Error fetching airports:", error)
         return []
+# app/services.py
+
+from .repository import get_flights_by_search, add_flight
+from .pubsub import publish
+
+def search_flights(origin, destination, date):
+    flights = get_flights_by_search(origin, destination, date)
+    return flights
+
+def save_flight(flight_data):
+    flight = add_flight(flight_data)
+    publish('flight_added', flight)  # <<< publish event
+    return flight
