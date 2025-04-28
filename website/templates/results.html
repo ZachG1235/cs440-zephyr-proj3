@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Flight Results</h1>
+
+{% if flights %}
+    <ul>
+    {% for flight in flights %}
+        <li>{{ flight.origin }} → {{ flight.destination }} on {{ flight.departure_date }} — ${{ flight.price }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No flights found.</p>
+{% endif %}
+
+<br>
+<a href="{{ url_for('views.home') }}">Back to Home</a>
+{% endblock %}
