@@ -80,7 +80,20 @@ def search_flights():
 
     # Render the home page with the list of flight deals
     return render_template("index.html", flights=flights, user=current_user)
+    
+@views.route('/search', methods=['GET'])
+def search():
+    origin = request.args.get('origin')
+    destination = request.args.get('destination')
+    date = request.args.get('date')
+    flights = search_flights(origin, destination, date)
+    return render_template('results.html', flights=flights)
 
+@views.route('/add', methods=['POST'])
+def add_flight():
+    flight_data = request.form.to_dict()
+    save_flight(flight_data)
+    return "Flight added!
 @views.route("/book/<offer_id>", methods=["GET"])
 @login_required
 def book_flight(offer_id):
