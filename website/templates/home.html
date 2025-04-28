@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Flights</h1>
+
+<form action="{{ url_for('views.search') }}" method="get">
+    <label for="origin">Origin:</label>
+    <input type="text" name="origin" id="origin" required><br><br>
+
+    <label for="destination">Destination:</label>
+    <input type="text" name="destination" id="destination" required><br><br>
+
+    <label for="date">Departure Date:</label>
+    <input type="date" name="date" id="date" required><br><br>
+
+    <input type="submit" value="Search">
+</form>
+
+<br>
+<a href="{{ url_for('views.add_flight') }}">Add a New Flight</a>
+{% endblock %}
